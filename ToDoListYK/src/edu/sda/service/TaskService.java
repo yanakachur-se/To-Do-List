@@ -1,6 +1,7 @@
 package edu.sda.service;
 
 import edu.sda.dao.TaskDAO;
+import edu.sda.data.Status;
 import edu.sda.data.Task;
 
 import java.util.ArrayList;
@@ -58,9 +59,6 @@ public class TaskService {
         taskDAO.update(title, task);
     }
 
-    public Task done(Task task) {
-        return new Task();
-    }
 
     public Task remove(Task task){
         return new Task();
@@ -71,7 +69,10 @@ public class TaskService {
     }
 
 
-    public void done() {
+    public void done(String title) {
+        Task task = taskDAO.getTask(title);
+        task.setStatus(Status.DONE);
+        taskDAO.update(title, task);
     }
 
     public void remove() {
@@ -83,8 +84,6 @@ public class TaskService {
     public void getTasksByProject() {
     }
 
-    public void update() {
-    }
 
     public void printTasksToConsole(Collection<Task> tasks){
         for (Task task: tasks) {
