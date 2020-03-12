@@ -7,6 +7,7 @@ public class Task {
     private String title;
     private Date dueDate;
     private String project;
+    private Status status;
 
     public Task (){
     }
@@ -15,6 +16,7 @@ public class Task {
         this.title = title;
         this.dueDate = dueDate;
         this.project = project;
+        this.status = Status.TO_DO;
     }
 
     public Date getDueDate() {
@@ -29,12 +31,17 @@ public class Task {
         return title;
     }
 
+    public Status getStatus() { return status; }
+
+    public void setStatus(Status status) { this.status = status; }
 
     @Override
     public String toString() {
         return "Task: "
                 + title +
+                ", status: " + status +
                 ", dueDate: " + dueDate +
                 ", project:'" + project + '\'';
     }
+
 }

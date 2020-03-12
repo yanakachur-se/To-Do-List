@@ -79,7 +79,7 @@ public class Menu {
                 break;
 
             case DONE:
-                taskService.done();
+                taskService.done(command.getSecondWord());
                 break;
 
             case REMOVE:

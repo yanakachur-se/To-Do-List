@@ -17,6 +17,10 @@ public class TaskDAO {
         storage.put(title, task);
     }
 
+    public Task getTask(String title) {
+        return storage.get(title);
+    }
+
     public Collection <Task> getAllTasks(){
         return storage.values();
     }
