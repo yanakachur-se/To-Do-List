@@ -11,18 +11,27 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * Represents a class of tasks collection.
+ */
+
 public class TaskDAO {
 
     static final String DATE_PATTERN = "dd/mm/yyyy";
-
     final DateFormat DATE_FORMAT = new SimpleDateFormat(DATE_PATTERN);
-
     private HashMap<String, Task> storage = new HashMap<>();
 
+    /**
+     * Adds a task into the collection
+     * @param task
+     */
     public void create(Task task) {
         storage.put(task.getTitle(), task);
     }
-
+    /**
+     * Updates a task in the collection
+     * @param title, task
+     */
     public void update(String title, Task task) {
         storage.put(title, task);
     }
@@ -51,6 +60,11 @@ public class TaskDAO {
         }
     }
 
+    /**
+     * Method to format collection of tasks for writing them into the file after quitting.
+     * @param tasks
+     * @return string of the tasks collection
+     */
     private String formatTasks(Collection<Task> tasks){
         String result = "";
         for (Task task: tasks ) {
@@ -59,10 +73,18 @@ public class TaskDAO {
         return result;
     }
 
+    /**
+     * Formats a single task to its string representation in the file.
+     * @param task
+     * @return string task
+     */
     private String formatTask(Task task){
         return task.getTitle() + ";" + task.getStatus() + ";" + task.getProject() + ";" + DATE_FORMAT.format(task.getDueDate());
     }
 
+    /**
+     * Method to retrieve task list from the file.
+     */
     public void readFromFile(){
         try {
             String fileName = "1.txt";
@@ -82,6 +104,10 @@ public class TaskDAO {
         }
     }
 
+    /**
+     * Method to parse a line from a file and map it to a task object and place it in the list of tasks.
+     * @param ln
+     */
     private void processTaskLine(String ln){
         String[] parsedLine = ln.split(";");
         String title = parsedLine[0];

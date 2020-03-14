@@ -9,15 +9,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Date;
 
+/**
+ * Implements business logic of the program
+ */
 
 public class TaskService {
 
     TaskDAO taskDAO = new TaskDAO();
-
-    public TaskService(){
-
-    }
-
 
     public static void printMenu(){
         System.out.println("To CREATE a task, type 'create' and info title ;due date (yyyy/mm/dd); project name");
@@ -37,15 +35,24 @@ public class TaskService {
         System.out.println("To quit, type 'quit'");
     }
 
+    /**
+     * To list all tasks in the current to do list
+     * @return
+     */
     public Collection<Task> getAllTasks(){
         return taskDAO.getAllTasks();
     }
 
-    public ArrayList<Task> getTasksByDate(Date date){
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public ArrayList<Task> getTasksByDate(Date date){ //TODO
         return new ArrayList<>();
     }
 
-    public List<Task> getTasksByProject(String project){
+    public List<Task> getTasksByProject(String project){ //TODO
         return new ArrayList<>();
     }
 
@@ -53,7 +60,6 @@ public class TaskService {
     public void create(Task task){
         taskDAO.create(task);
     }
-
 
     public void update (String title, Task task){
         taskDAO.update(title, task);
@@ -63,26 +69,19 @@ public class TaskService {
         taskDAO.saveTasksToFile();
     }
 
+    public void remove(String title, Task task){ //TODO
 
-    public Task remove(Task task){
-        return new Task();
     }
 
+    /**
+     * Changes the status of the task to done
+     * @param title name of the task
+     */
     public void done(String title) {
         Task task = taskDAO.getTask(title);
         task.setStatus(Status.DONE);
         taskDAO.update(title, task);
     }
-
-    public void remove() {
-    }
-
-    public void getTasksByDate() {
-    }
-
-    public void getTasksByProject() {
-    }
-
 
     public void printTasksToConsole(Collection<Task> tasks){
         for (Task task: tasks) {

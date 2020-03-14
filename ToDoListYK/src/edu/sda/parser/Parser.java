@@ -1,5 +1,10 @@
 package edu.sda.parser;
 
+import edu.sda.data.Task;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -45,15 +50,8 @@ public class Parser {
         return new Command(commands.getCommandWord(word1), words);
     }
 
-    static void mapStringToTask(){
-
-    }
-
     /**
      * Print out a list of valid command words.
      */
-    public void showCommands()
-    {
-        commands.showAll();
-    }
+    public void showCommands() { commands.showAll(); }
 }
