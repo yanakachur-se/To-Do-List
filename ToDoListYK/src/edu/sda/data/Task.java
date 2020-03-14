@@ -19,6 +19,13 @@ public class Task {
         this.status = Status.TO_DO;
     }
 
+    public Task(String title, Date dueDate, String project, Status status) {
+        this.title = title;
+        this.dueDate = dueDate;
+        this.project = project;
+        this.status = status;
+    }
+
     public Date getDueDate() {
         return dueDate;
     }

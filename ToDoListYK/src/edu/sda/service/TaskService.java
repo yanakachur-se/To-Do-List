@@ -59,15 +59,14 @@ public class TaskService {
         taskDAO.update(title, task);
     }
 
+    public void saveAll(){
+        taskDAO.saveTasksToFile();
+    }
+
 
     public Task remove(Task task){
         return new Task();
     }
-
-    public static void quit(){
-
-    }
-
 
     public void done(String title) {
         Task task = taskDAO.getTask(title);
@@ -89,5 +88,9 @@ public class TaskService {
         for (Task task: tasks) {
             System.out.println(task.toString());
         }
+    }
+
+    public void initializeTaskStorage(){
+        taskDAO.readFromFile();
     }
 }
