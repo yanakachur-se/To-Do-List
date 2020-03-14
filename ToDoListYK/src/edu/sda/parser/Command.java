@@ -10,12 +10,12 @@ public class Command
      * the second may be null.
      * @param commandWord The CommandWord. UNKNOWN if the command word
      *                  was not recognised.
-     * @param secondWord The second word of the command. May be null.
+     * @param taskWord The rest of the input of the command. May be null.
      */
-    public Command(CommandWord commandWord, String secondWord)
+    public Command(CommandWord commandWord, String taskWord)
     {
         this.commandWord = commandWord;
-        this.secondWord = secondWord;
+        this.secondWord = taskWord;
     }
 
     /**
@@ -31,10 +31,7 @@ public class Command
      * @return The second word of this command. Returns null if there was no
      * second word.
      */
-    public String getSecondWord()
-    {
-        return secondWord;
-    }
+    public String getSecondWord() { return secondWord; }
 
     /**
      * @return true if this command was not understood.

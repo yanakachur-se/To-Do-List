@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class Menu {
     /**
-     *  Main program routine.  Loops until end of program.
+     *  Main program routine. Loops until end of program.
      */
 
     private Parser parser;
@@ -26,11 +26,8 @@ public class Menu {
 
     public void runProgram()
     {
-
         printWelcome();
         taskService.initializeTaskStorage();
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
 
         boolean finished = false;
         while (! finished) {
@@ -47,7 +44,7 @@ public class Menu {
         System.out.println("You can also track if the task is done, update and remove your tasks.");
         System.out.println("You have X tasks to do and Y tasks done.");
         System.out.println("Type " + CommandWord.MENU + " to see the instructions.");
-        }
+    }
 
     /**
      * Given a command, process (that is: execute) the command.
@@ -62,7 +59,7 @@ public class Menu {
 
         switch (commandWord) {
             case UNKNOWN:
-                System.out.println("Please enter a valid task...");
+                System.out.println("Please enter a valid command...");
                 break;
 
             case MENU:
@@ -70,12 +67,12 @@ public class Menu {
                 break;
 
             case CREATE:
-                Task task = mapToTask(command.getSecondWord());
+                Task task = mapStringToTask(command.getSecondWord());
                 taskService.create(task);
                 break;
 
             case UPDATE:
-                Task taskToUpdate = mapToTask(command.getSecondWord());
+                Task taskToUpdate = mapStringToTask(command.getSecondWord());
                 taskService.update(taskToUpdate.getTitle(), taskToUpdate);
                 break;
 
@@ -83,15 +80,15 @@ public class Menu {
                 taskService.done(command.getSecondWord());
                 break;
 
-            case REMOVE:
+            case REMOVE: // TODO
                 taskService.remove();
                 break;
 
-            case BY_DATE:
+            case BY_DATE: // TODO
                 taskService.getTasksByDate();
                 break;
 
-            case BY_PROJECT:
+            case BY_PROJECT: // TODO
                 taskService.getTasksByProject();
                 break;
 
@@ -101,17 +98,22 @@ public class Menu {
 
             case QUIT:
                 taskService.saveAll();
-                wantToQuit = quit(command);
+                wantToQuit = quit();
                 break;
         }
         return wantToQuit;
     }
 
-    private boolean quit(Command command) {
+    private boolean quit() {
         return true;
     }
 
-    Task mapToTask(String wordTask){
+    /**
+     * Method to map string from input to a task object.
+     * @param wordTask
+     * @return and object of task
+     */
+    Task mapStringToTask(String wordTask){
 
         String[] parsedTaskString = wordTask.split(";");
 
@@ -124,6 +126,11 @@ public class Menu {
         return new Task(taskTitle, taskDate, project);
     }
 
+    /**
+     * Method to  map string to a date object for a task.
+     * @param sDate string date
+     * @return date
+     */
     Date mapStringToDate(String sDate){
         Date taskDate = null;
         try {
@@ -133,5 +140,4 @@ public class Menu {
         }
         return taskDate;
     }
-
 }

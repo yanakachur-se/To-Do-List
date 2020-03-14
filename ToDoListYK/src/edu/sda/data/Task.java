@@ -3,6 +3,10 @@ package edu.sda.data;
 
 import java.util.Date;
 
+/**
+ * Represents a task in the to do list
+ */
+
 public class Task {
     private String title;
     private Date dueDate;
