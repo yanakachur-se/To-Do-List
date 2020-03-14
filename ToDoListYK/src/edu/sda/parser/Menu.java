@@ -26,8 +26,9 @@ public class Menu {
 
     public void runProgram()
     {
-        printWelcome();
 
+        printWelcome();
+        taskService.initializeTaskStorage();
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
@@ -99,6 +100,7 @@ public class Menu {
                 break;
 
             case QUIT:
+                taskService.saveAll();
                 wantToQuit = quit(command);
                 break;
         }
