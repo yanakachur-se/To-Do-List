@@ -4,10 +4,8 @@ import edu.sda.dao.TaskDAO;
 import edu.sda.data.Status;
 import edu.sda.data.Task;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Implements business logic of the program
@@ -43,19 +41,24 @@ public class TaskService {
         return taskDAO.getAllTasks();
     }
 
-    /**
-     *
-     * @param date
-     * @return
-     */
-    public ArrayList<Task> getTasksByDate(Date date){ //TODO
-        return new ArrayList<>();
+
+    public Collection <Task> filterByProject(String project){
+        Collection<Task> tasks = taskDAO.getAllTasks();
+        Collection<Task> result = tasks.stream()
+                .filter(line -> project.equals(line.getProject()))
+                .collect(Collectors.toList());
+
+        return result;
     }
 
-    public List<Task> getTasksByProject(String project){ //TODO
-        return new ArrayList<>();
-    }
+    public Collection <Task> sortByDate(){
+        Collection<Task> tasks = taskDAO.getAllTasks();
+        Collection<Task> result = tasks.stream()
+                .sorted(Comparator.comparing(Task::getDueDate))
+                .collect(Collectors.toList());
 
+        return result;
+    }
 
     public void create(Task task){
         taskDAO.create(task);
@@ -69,8 +72,8 @@ public class TaskService {
         taskDAO.saveTasksToFile();
     }
 
-    public void remove(String title, Task task){ //TODO
-
+    public void remove(String title){
+        taskDAO.removeTask(title);
     }
 
     /**
