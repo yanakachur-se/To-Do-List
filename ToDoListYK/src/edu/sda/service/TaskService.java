@@ -76,14 +76,26 @@ public class TaskService {
         taskDAO.removeTask(title);
     }
 
-    /**
-     * Changes the status of the task to done
-     * @param title name of the task
-     */
     public void done(String title) {
         Task task = taskDAO.getTask(title);
         task.setStatus(Status.DONE);
         taskDAO.update(title, task);
+    }
+
+    public int countTasksToDo(){
+        Collection<Task> tasks = taskDAO.getAllTasks();
+        int count = (int) tasks.stream()
+                .filter(line ->line.getStatus().equals(Status.TO_DO))
+                .count();
+    return count;
+    }
+
+    public int countTasksDone(){
+        Collection<Task> tasks = taskDAO.getAllTasks();
+        int count = (int) tasks.stream()
+                .filter(line ->line.getStatus().equals(Status.DONE))
+                .count();
+        return count;
     }
 
     public void printTasksToConsole(Collection<Task> tasks){
