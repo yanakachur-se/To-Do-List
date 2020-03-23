@@ -80,16 +80,17 @@ public class Menu {
                 taskService.done(command.getSecondWord());
                 break;
 
-            case REMOVE: // TODO
-                taskService.remove();
+            case REMOVE:
+                taskService.remove(command.getSecondWord());
                 break;
 
-            case BY_DATE: // TODO
-                taskService.getTasksByDate();
+            case BY_DATE:
+                taskService.printTasksToConsole(taskService.sortByDate());
                 break;
 
-            case BY_PROJECT: // TODO
-                taskService.getTasksByProject();
+            case BY_PROJECT:
+                String project = command.getSecondWord();
+                taskService.printTasksToConsole(taskService.filterByProject(project));
                 break;
 
             case LIST:

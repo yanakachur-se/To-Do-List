@@ -23,13 +23,16 @@ public class TaskDAO {
 
     /**
      * Adds a task into the collection
+     *
      * @param task
      */
     public void create(Task task) {
         storage.put(task.getTitle(), task);
     }
+
     /**
      * Updates a task in the collection
+     *
      * @param title, task
      */
     public void update(String title, Task task) {
@@ -49,6 +52,10 @@ public class TaskDAO {
         writeTextToFile(text);
     }
 
+    public void removeTask(String title){
+        storage.remove(title);
+    }
+
     private void writeTextToFile(String tasks) {
         try {
             FileWriter myWriter = new FileWriter("1.txt");
@@ -62,30 +69,32 @@ public class TaskDAO {
 
     /**
      * Method to format collection of tasks for writing them into the file after quitting.
+     *
      * @param tasks
      * @return string of the tasks collection
      */
-    private String formatTasks(Collection<Task> tasks){
+    private String formatTasks(Collection<Task> tasks) {
         String result = "";
-        for (Task task: tasks ) {
-            result+= formatTask(task) + "\n";
+        for (Task task : tasks) {
+            result += formatTask(task) + "\n";
         }
         return result;
     }
 
     /**
      * Formats a single task to its string representation in the file.
+     *
      * @param task
      * @return string task
      */
-    private String formatTask(Task task){
+    private String formatTask(Task task) {
         return task.getTitle() + ";" + task.getStatus() + ";" + task.getProject() + ";" + DATE_FORMAT.format(task.getDueDate());
     }
 
     /**
      * Method to retrieve task list from the file.
      */
-    public void readFromFile(){
+    public void readFromFile() {
         try {
             String fileName = "1.txt";
             File file = new File(fileName);
@@ -99,16 +108,17 @@ public class TaskDAO {
                 processTaskLine(line);
             }
             br.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Unable to read tasks from storage");
         }
     }
 
     /**
      * Method to parse a line from a file and map it to a task object and place it in the list of tasks.
+     *
      * @param ln
      */
-    private void processTaskLine(String ln){
+    private void processTaskLine(String ln) {
         String[] parsedLine = ln.split(";");
         String title = parsedLine[0];
         Status status = Status.valueOf(parsedLine[1]);
@@ -120,11 +130,11 @@ public class TaskDAO {
         storage.put(title, task);
     }
 
-    Date mapStringToDate(String sDate){
+    Date mapStringToDate(String sDate) {
         Date taskDate = null;
         try {
             taskDate = new SimpleDateFormat(DATE_PATTERN).parse(sDate);
-        } catch (ParseException e){
+        } catch (ParseException e) {
             System.out.println("Incorrect date format");
         }
         return taskDate;
