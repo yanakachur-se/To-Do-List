@@ -26,8 +26,8 @@ public class Menu {
 
     public void runProgram()
     {
-        printWelcome();
         taskService.initializeTaskStorage();
+        printWelcome();
 
         boolean finished = false;
         while (! finished) {
@@ -42,7 +42,7 @@ public class Menu {
         System.out.println("Welcome to our to do list!");
         System.out.println("It can store your tasks with due dates and projects assigned.");
         System.out.println("You can also track if the task is done, update and remove your tasks.");
-        System.out.println("You have X tasks to do and Y tasks done.");
+        System.out.println("You have " + taskService.countTasksToDo() + " tasks to do and " + taskService.countTasksDone() + " tasks done.");
         System.out.println("Type " + CommandWord.MENU + " to see the instructions.");
     }
 
