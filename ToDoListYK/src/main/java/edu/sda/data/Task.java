@@ -16,7 +16,7 @@ public class Task {
     public Task (){
     }
 
-    public Task (String title, Date dueDate, String project){
+    public Task (String title, Date dueDate, String project) {
         this.title = title;
         this.dueDate = dueDate;
         this.project = project;

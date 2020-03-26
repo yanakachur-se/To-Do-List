@@ -34,7 +34,7 @@ public class Menu {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for using to do list!  Good bye");
+        System.out.println("Thank you for using to do list! Good bye");
     }
 
     private void printWelcome() {
@@ -67,12 +67,12 @@ public class Menu {
                 break;
 
             case CREATE:
-                Task task = mapStringToTask(command.getSecondWord());
+                Task task = parser.mapStringToTask(command.getSecondWord());
                 taskService.create(task);
                 break;
 
             case UPDATE:
-                Task taskToUpdate = mapStringToTask(command.getSecondWord());
+                Task taskToUpdate = parser.mapStringToTask(command.getSecondWord());
                 taskService.update(taskToUpdate.getTitle(), taskToUpdate);
                 break;
 
@@ -107,38 +107,5 @@ public class Menu {
 
     private boolean quit() {
         return true;
-    }
-
-    /**
-     * Method to map string from input to a task object.
-     * @param wordTask
-     * @return and object of task
-     */
-    Task mapStringToTask(String wordTask){
-
-        String[] parsedTaskString = wordTask.split(";");
-
-        String taskTitle = parsedTaskString[0];
-
-        Date taskDate = mapStringToDate(parsedTaskString[1]) ;
-
-        String project = parsedTaskString[2];
-
-        return new Task(taskTitle, taskDate, project);
-    }
-
-    /**
-     * Method to  map string to a date object for a task.
-     * @param sDate string date
-     * @return date
-     */
-    Date mapStringToDate(String sDate){
-        Date taskDate = null;
-        try {
-             taskDate = new SimpleDateFormat("dd/mm/yyyy").parse(sDate);
-        } catch (ParseException e){
-            System.out.println("Incorrect date format");
-        }
-        return taskDate;
     }
 }

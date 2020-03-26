@@ -16,21 +16,14 @@ public class TaskService {
     TaskDAO taskDAO = new TaskDAO();
 
     public static void printMenu(){
-        System.out.println("To CREATE a task, type 'create' and info title ;due date (yyyy/mm/dd); project name");
-        System.out.println();
-        System.out.println("To UPDATE a task, type 'update' and task title");
-        System.out.println();
-        System.out.println("To set task as DONE, type 'done' and a task title");
-        System.out.println();
-        System.out.println("To see the list of tasks filtered by date, type 'by_date'");
-        System.out.println();
-        System.out.println("To see the list of tasks filtered by projects, type 'by_project'");
-        System.out.println();
-        System.out.println("To see all the tasks in the list, type 'list'");
-        System.out.println();
-        System.out.println("To remove a task, type 'remove' and a task title");
-        System.out.println();
-        System.out.println("To quit, type 'quit'");
+        System.out.println("- To CREATE a task, type 'create' and info title;due date (yyyy/mm/dd);project name");
+        System.out.println("- To UPDATE a task, type 'update' and task title");
+        System.out.println("- To set task as DONE, type 'done' and a task title");
+        System.out.println("- To see the list of tasks filtered by date, type 'by_date'");
+        System.out.println("- To see the list of tasks filtered by projects, type 'by_project' and a name of the project");
+        System.out.println("- To see all the tasks in the list, type 'list'");
+        System.out.println("- To remove a task, type 'remove' and a task title");
+        System.out.println("- To quit, type 'quit'");
     }
 
     /**
@@ -66,20 +59,21 @@ public class TaskService {
 
     public void update (String title, Task task){
         taskDAO.update(title, task);
+        confirmUpdateMessage();
     }
 
-    public void saveAll(){
-        taskDAO.saveTasksToFile();
-    }
+    public void saveAll(){ taskDAO.saveTasksToFile(); }
 
     public void remove(String title){
         taskDAO.removeTask(title);
+        confirmUpdateMessage();
     }
 
     public void done(String title) {
         Task task = taskDAO.getTask(title);
         task.setStatus(Status.DONE);
         taskDAO.update(title, task);
+        confirmUpdateMessage();
     }
 
     public int countTasksToDo(){
@@ -106,5 +100,9 @@ public class TaskService {
 
     public void initializeTaskStorage(){
         taskDAO.readFromFile();
+    }
+
+    private void confirmUpdateMessage(){
+        System.out.println("The task list was updated");
     }
 }
