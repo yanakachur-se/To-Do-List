@@ -73,7 +73,7 @@ public class TestTaskService {
     }
 
     @Test
-    void testCountTasksDoneWhenNoTasksDone() {
+    public void testCountTasksDoneWhenNoTasksDone() {
         TaskService taskService = new TaskService();
         Task task1 = new Task("Task 1", new Date(), "project 1", Status.TO_DO);
         Task task2 = new Task("Task 2", new Date(), "project 1", Status.TO_DO);
@@ -94,7 +94,7 @@ public class TestTaskService {
         taskService.create(task1);
         taskService.create(task2);
         taskService.create(task3);
-        int result = taskService.countTasksDone();
+        int result = taskService.countTasksToDo();
         assertEquals(1, result);
     }
 

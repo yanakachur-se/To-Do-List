@@ -7,7 +7,7 @@ Project includes tests and requires Gradle dependency management.
 ## Built With
 * [Gradle](https://docs.gradle.org/current/userguide/userguide.html) - Dependency Management
 
-##Authors
+##Authors 
 * **Yana Kachur** 
 
 ## License
