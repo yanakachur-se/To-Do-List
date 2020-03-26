@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  * Parser reads user input and interprets it as a
- * command. Every time it is called, it reads a line from the terminal and
+ * command and transfers it to objects. Every time it is called, it reads a line from the terminal and
  * tries to interpret the line as a two-word command. It returns the command
  * as an object of class Command.
  *
@@ -51,7 +51,32 @@ public class Parser {
     }
 
     /**
-     * Print out a list of valid command words.
+     * Method to map string from input to a task object.
+     * @param wordTask
+     * @return and object of task
      */
-    public void showCommands() { commands.showAll(); }
+    public Task mapStringToTask(String wordTask){
+
+        String[] parsedTaskString = wordTask.split(";");
+        String taskTitle = parsedTaskString[0];
+        Date taskDate = mapStringToDate(parsedTaskString[1]) ;
+        String project = parsedTaskString[2];
+
+        return new Task(taskTitle, taskDate, project);
+    }
+
+    /**
+     * Method to  map string to a date object for a task.
+     * @param sDate string date
+     * @return date
+     */
+    Date mapStringToDate(String sDate){
+        Date taskDate = null;
+        try {
+            taskDate = new SimpleDateFormat("dd/mm/yyyy").parse(sDate);
+        } catch (ParseException e){
+            System.out.println("Incorrect date format");
+        }
+        return taskDate;
+    }
 }

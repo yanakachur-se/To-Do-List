@@ -41,12 +41,5 @@ public class Command
         return (commandWord == CommandWord.UNKNOWN);
     }
 
-    /**
-     * @return true if the command has a second word.
-     */
-    public boolean hasSecondWord()
-    {
-        return (secondWord != null);
-    }
 }
 

@@ -109,7 +109,7 @@ public class TaskDAO {
             }
             br.close();
         } catch (IOException e) {
-            System.out.println("Unable to read tasks from storage");
+            System.out.println("Task storage file is empty");
         }
     }
 
