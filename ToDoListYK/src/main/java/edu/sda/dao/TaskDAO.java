@@ -36,7 +36,9 @@ public class TaskDAO {
      * @param title, task
      */
     public void update(String title, Task task) {
-        storage.put(title, task);
+        if(ifTaskExists(title)) {
+            storage.put(title, task);
+        }
     }
 
     public Task getTask(String title) {
@@ -52,10 +54,11 @@ public class TaskDAO {
         writeTextToFile(text);
     }
 
-    public void removeTask(String title){
-        storage.remove(title);
+    public void removeTask(String title) {
+        if (ifTaskExists(title)) {
+            storage.remove(title);
+        }
     }
-
     private void writeTextToFile(String tasks) {
         try {
             FileWriter myWriter = new FileWriter("1.txt");
@@ -138,5 +141,14 @@ public class TaskDAO {
             System.out.println("Incorrect date format");
         }
         return taskDate;
+    }
+
+    public boolean ifTaskExists(String title){
+        boolean ifTaskExists = true;
+        if (storage.get(title) == null){
+            System.out.println("There is no task with this title. Please type a valid title");
+            ifTaskExists = false;
+        }
+        return ifTaskExists;
     }
 }

@@ -58,22 +58,24 @@ public class TaskService {
     }
 
     public void update (String title, Task task){
+
         taskDAO.update(title, task);
-        confirmUpdateMessage();
     }
 
     public void saveAll(){ taskDAO.saveTasksToFile(); }
 
     public void remove(String title){
         taskDAO.removeTask(title);
-        confirmUpdateMessage();
     }
 
     public void done(String title) {
         Task task = taskDAO.getTask(title);
+        if(task == null) {
+            System.out.println("There is no task with this title in your list. Please type valid title");
+        } else {
         task.setStatus(Status.DONE);
         taskDAO.update(title, task);
-        confirmUpdateMessage();
+        }
     }
 
     public int countTasksToDo(){
@@ -100,9 +102,5 @@ public class TaskService {
 
     public void initializeTaskStorage(){
         taskDAO.readFromFile();
-    }
-
-    private void confirmUpdateMessage(){
-        System.out.println("The task list was updated");
     }
 }
