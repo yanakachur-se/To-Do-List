@@ -5,8 +5,6 @@ This is a simple to do list application where you can create, update, store task
 You also can see the list of all task, sort them by due date or filter by project. 
 
 
-## Using To Do List
-
 ## **How to use To Do List**
 
 For using To Do List, you need to launch the application through terminal and use it for typing input.
