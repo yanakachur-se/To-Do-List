@@ -1,11 +1,11 @@
 # TO DO LIST
 
-##What is it?
+## What is it?
 This is a simple to do list application where you can create, update, store tasks as well as change their status to Done.
 You also can see the list of all task, sort them by due date or filter by project. 
 
 
-##Using To Do List
+## Using To Do List
 
 ## **How to use To Do List**
 
