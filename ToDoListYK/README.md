@@ -1,13 +1,13 @@
 # TO DO LIST
 Simple to do list application written in Java. The application allows a user to create new tasks, assign them a title and due date, and choose a project for that task. For obtaining user input, we use text based user interface via the command-line. The user is able to also edit, mark as done or remove tasks. When user quits, we save the current task list to file, and after restart the application, the former state is restored. 
 
-##Getting Started
+## Getting Started
 Project includes tests and requires Gradle dependency management. 
 
 ## Built With
 * [Gradle](https://docs.gradle.org/current/userguide/userguide.html) - Dependency Management
 
-##Authors 
+## Authors 
 * **Yana Kachur** 
 
 ## License
